@@ -5,7 +5,8 @@
   "author": "vviital <vviital@tut.by>",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node duplicates-finder.js"
+    "start": "babel-node src/index.js",
+    "build": "babel src -d lib"
   },
   "babel": {
     "presets": [

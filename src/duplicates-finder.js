@@ -66,19 +66,10 @@ const duplicateFinder = (basePath) => {
   return async function *walkWrapper() {
     for await (const fileStats of walk(basePath));
 
-    const iterator = memory[Symbol.iterator]();
-
-    for (const value of iterator) {
-      yield value;
-    }
+    for (const value of memory) yield value;
   };;
 };
 
-(async () => {
-  // const iterator = fsgen(path.join(__dirname, 'test-dir'))();
-  const iterator = duplicateFinder('/Users/vviital/projects/learning/js')();
-
-  for await (const value of iterator) {
-    console.log('value', value);
-  }
-})().then(console.log).catch(console.error);
+export {
+  duplicateFinder,
+};
