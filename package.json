@@ -1,0 +1,30 @@
+{
+  "name": "learning-generators",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "vviital <vviital@tut.by>",
+  "license": "MIT",
+  "scripts": {
+    "start": "babel-node duplicates-finder.js"
+  },
+  "babel": {
+    "presets": [
+      "es2015-node",
+      "es2016",
+      "es2017"
+    ],
+    "plugins": [
+      "transform-async-generator-functions"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-async-generator-functions": "^6.24.1",
+    "babel-preset-es2015-node": "^6.1.1",
+    "babel-preset-es2016": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1"
+  }
+}
