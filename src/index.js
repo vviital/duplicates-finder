@@ -1,6 +1,4 @@
-import fs from 'fs';
-import Promise from 'bluebird';
-import path from 'path';
+import { writeToCSV, writeToJSON } from './writers';
 
 const baseName = process.env.BASE_NAME || __dirname;
 
@@ -9,15 +7,15 @@ import { duplicateFinder } from './duplicates-finder';
 (async () => {
   const iterator = duplicateFinder(baseName)();
 
-  const object = {};
+  const array = [];
 
   for await (const value of iterator) {
-    const key = JSON.parse(value[0]);
-    object[key.filename] = { count: value[1], size: key.size };
+    array.push([JSON.parse(value[0]), value[1]]);
   }
 
-  const report = JSON.stringify(object, ' ', 1);
-  const reportName = path.join(__dirname, '..', 'report.json');
+  await Promise.all([
+    writeToJSON(array),
+    writeToCSV(array),
+  ])
 
-  await Promise.promisify(fs.writeFile, { context: fs })(reportName, report);
 })().catch(console.error);
